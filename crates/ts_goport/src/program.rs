@@ -3832,10 +3832,15 @@ fn start_checker_group_do(
 ) -> PendingCheckerGroup {
     let count = checker_count();
     let files: Arc<Vec<Node>> = Arc::new(files.to_vec());
+    // PERF (tailfault1): while one checker is left with work, a helper
+    // thread keeps touched free memory in its arena (`prefault`).
+    let tail = crate::prefault::GroupTail::new(count);
     let receivers = (0..count)
         .map(|checker_index| {
             let files = Arc::clone(&files);
+            let tail = tail.clone();
             send_job(checker_index, move |checker| {
+                let _tail = tail.as_ref().map(|tail| tail.job(checker_index));
                 let mine: Vec<(usize, Node)> = with_tables(|tables| {
                     let associations = tables
                         .file_associations

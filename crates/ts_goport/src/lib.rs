@@ -53,6 +53,8 @@ pub mod options;
 // The JSON form of `core.CompilerOptions` (moved out of `api` in bump B wave 3).
 pub mod options_json;
 pub mod pprof;
+/// The tail pre-fault helper of the checker pool (tailfault1).
+mod prefault;
 pub mod prelude;
 pub mod printer;
 pub mod program;
