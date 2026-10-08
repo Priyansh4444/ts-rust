@@ -1,0 +1,4 @@
+[[production]]
+package = "ts_goport"
+bin = "tsgo"
+reason = "The shipped tsgo binary is the production consumer of the port."
