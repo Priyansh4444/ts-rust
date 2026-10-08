@@ -1,4 +1,24 @@
 [[production]]
 package = "ts_goport"
 bin = "tsgo"
-reason = "The shipped tsgo binary is the production consumer of the port."
+reason = "Shipped as the tsc-rs npm binary (release.yml builds --bin tsgo)."
+
+[[production]]
+package = "ts_goport"
+bin = "goport"
+reason = "The type-check binary that perf.sh benchmarks and the gate runs."
+
+[[production]]
+package = "ts_goport"
+bin = "goport_emit"
+reason = "Run by the gate (gate.sh --bins)."
+
+[[production]]
+package = "ts_goport"
+bin = "goport_typesyms"
+reason = "Run by the gate (gate.sh --bins)."
+
+[[production]]
+package = "ts_goport"
+bin = "goport_build"
+reason = "Run by the gate (gate.sh --bins)."
